@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wisecow-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wisecow
+
+  template:
+    metadata:
+      labels:
+        app: wisecow
+
+    spec:
+      containers:
+      - name: wise-image
+
+        # Image file name
+        image: wisecow:v1
+        ports:
+        - containerPort: 4499
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wisecow-service
+
+spec:
+  type: ClusterIP
+  selector:
+    app: wisecow
+
+  ports:
+  - protocol: TCP
+    # Will be used by other services to connect to this service
+    port: 80
+    # Will be used to connect the container inside the pod
+    targetPort: 4499
