@@ -47,6 +47,10 @@ jobs:
           echo "Loading $IMAGE into Minikube..."
           minikube image load "$IMAGE"
 
+      - name: Start minikube
+        run: |
+          minikube start
+          
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f k8/
