@@ -1,2 +1,3 @@
 tls.key
 tls.crt
+tls-secret-copy.yaml
